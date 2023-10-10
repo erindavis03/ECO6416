@@ -1,6 +1,6 @@
 ---
 title: "Coding Assignment 2"
-author: "Team N"
+author: "Team 3" 
 date: "Due: 2023-10-22 23:59"
 output: 
   html_document:
@@ -77,5 +77,8 @@ Compare the model from question 1, to a model that does not include the group of
 ```{r q4}
 
 ```
+
+
+
 
 
