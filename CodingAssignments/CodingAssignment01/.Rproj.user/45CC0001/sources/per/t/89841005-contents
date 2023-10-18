@@ -1,17 +1,23 @@
 ---
-title: "Coding Assignment 2"
-author: "Team 3 test" 
-date: "Due: 2023-10-22 23:59"
+title: "Coding Assignment 1"
+author: "Team N"
+date: "Due: 2023-10-01 23:59"
 output: 
   html_document:
     toc: true
+    toc_depth: 2
     toc_float: true
 ---
 
 ```{r setup, include=FALSE}
-#Put any packages you need here
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+```{r packages}
+# Put any packages you want here
+
+```
+
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 100 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
 
@@ -28,57 +34,49 @@ The data on the 100 customers in the sample is as follows:
 Answer the following questions using complete sentences and attach all output, plots, etc. within this report.
 
 
+**For this assignment, ignore the categorical variables (gender, smoker, cities)**
+
 ```{r dataset, include=FALSE}
-insurance <- read.csv("../Data/insurance_0026_Group1.csv")
+# Bring in the dataset here
+
+
 ```
 
 
 
-## Question 1
+# Question 1
 
-Generate this regression equation:
-
-$$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}*Female + \beta_{5}*Smoker + \beta_{6}*WinterSprings + \beta_{7}*WinterPark + \beta_{8}*Oviedo$$
+Perform univariate analyses on the quantitative variables (center, shape, spread). Include descriptive statistics, and histograms. Be sure to use terms discussed in class such as bimodal, skewed left, etc.
 
 ```{r q1}
 
 ```
 
-Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
+# Question 2
 
+Perform bivariate analyses on the quantitative variables (direction, strength and form). Describe the linear association between all variables. 
 
+```{r q2}
 
-## Question 2
+```
 
-Interpret the coefficients of all the independent variables that tested significant.
+# Question 3
 
+Generate a regression equation in the following form:
 
-## Question 3
-
-The insurance agent returns with another client:
-
-- Age: 35
-- BMI: 26
-- Children: 1
-- Gender: Female
-- Smoker: No
-- City: Sanford
-
-Using the regression equation above, predict the amount of medical expenses associated with this policy. (Provide a 95% confidence interval as well)
+$$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$$
 
 ```{r q3}
 
 ```
 
-## Question 4
+also write out the regression cleanly in this document.
 
-Compare the model from question 1, to a model that does not include the group of city dummies. Does including the cities reduce the SSE by a statistically significant amount? (check the partial F-test for significance of the dummies as a group). Use $\alpha = 0.05$
+# Question 4
+
+An eager insurance representative comes back with a potential client. The client is 40, their BMI is 30, and they have one dependent. Using the regression equation above, predict the amount of medical expenses associated with this policy. (Provide a 95% confidence interval as well)
+
 
 ```{r q4}
 
 ```
-
-
-
-
-

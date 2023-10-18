@@ -1,0 +1,4 @@
+"0","insurance <- read.csv(""../Data/insurance_0026_Group1.csv"")"
+"2","Warning: cannot open file '../Data/insurance_0026_Group1.csv': No such file or directory"
+"2","Error in file(file, ""rt"") : cannot open the connection
+"

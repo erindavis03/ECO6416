@@ -1,26 +1,27 @@
 {
-    "id": "06D442E1",
+    "id": "8B7FBF21",
     "path": "C:/Users/Agars/OneDrive - University of Central Florida/Documents/Terms/fall 23/ECO6416/GitHub/ECO6416-Group3/CodingAssignments/CodingAssignment02/CodingAssignment2.Rmd",
     "project_path": "CodingAssignment2.Rmd",
     "type": "r_markdown",
-    "hash": "2150776088",
+    "hash": "3512631467",
     "contents": "",
     "dirty": false,
-    "created": 1696982083600.0,
+    "created": 1697585247821.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "2,20",
-        "scrollLine": "0"
+        "cursorPosition": "63,0",
+        "scrollLine": "48",
+        "last_setup_crc32": "70d74c441ca7c969"
     },
     "folds": "",
-    "lastKnownWriteTime": 1696982092,
+    "lastKnownWriteTime": 1697590370,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1696982092452,
+    "last_content_update": 1697590370557,
     "read_only": false,
     "read_only_alternatives": []
 }

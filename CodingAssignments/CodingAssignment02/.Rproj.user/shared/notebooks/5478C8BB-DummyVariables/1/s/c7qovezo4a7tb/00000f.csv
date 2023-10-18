@@ -1,0 +1,3 @@
+"0","sat <- read_xlsx(""../Data/8SAT.xlsx"")"
+"0",""
+"0","sat_86AP <- sat[,-1]"
