@@ -62,7 +62,7 @@ Age: The variable tests signifcant and has a positive coefficient, this means ag
 
 Smoker: The variable tests signifcant and has a positive coefficient, this means being a smoker will directly affect the amount charged for insurance. The margin of error is calculated by multiplying 1.3 (80% confidence) by 1,484.07 which is approximately 1,930. This means if you're a smoker, there will be a 24,287.83 dollar increase in charges, give or take 1,930.
 
-Oviedo: The variable tests signifcant and has a negative coefficient.The margin of error is calculated by multiplying 1.3 (80% confidence) by 1518.72 which is approximately 1,974. This means living in Oviedo instead of sanford will decrease your insurance charges by 1,974.
+Oviedo: The variable tests signifcant and has a negative coefficient.The margin of error is calculated by multiplying 1.3 (80% confidence) by 1518.72 which is approximately 1,974. This means living in Oviedo instead of sanford will decrease your insurance charges by 2,682.81 give or take 1,974.
 
 ## Question 3
 
@@ -84,6 +84,8 @@ prediction <- predict(model, newdata = new_client, interval = "confidence")
 prediction
 
 ```
+The amount of medical expenses for this client would be 6,656 with 95% confidence that the expenses would fall between 4,302 and 9281.
+
 
 ## Question 4
 
