@@ -109,12 +109,20 @@ if (p_value < alpha) {
 ```
 #explanation to the two models: 
 
-Including the cities in the regression model significantly reduces the SSE (Sum of Squared Errors) based on the results of the partial F-test.
+Including the cities dummies does not significantly reduce the SSE in a statistically significant way.
 
-The null hypothesis (H0) for the partial F-test is that the coefficients for all the city dummy variables are equal to zero, meaning the cities do not have a significant impact on charges. The alternative hypothesis (Ha) is that at least one of the coefficients for the city dummy variables is not equal to zero, indicating that including the cities does reduce the SSE significantly.
+Model 1 (including city dummies): The Residual Sum of Sqaures (RSS): 2,488,901,754 with 91 degrees of freedom.
 
-The p-value obtained from the partial F-test was compared to the significance level (α = 0.05). Since the p-value was less than 0.05, it indicates that including the cities in the model reduced the SSE significantly. Therefore, the conclusion based on the provided code is that including the cities does reduce the SSE by a statistically significant amount.
+model 2 (excluding city dummies): The Residual sum of squares (RSS): 2,629,860,423 with 94 degrees of freedom
 
+The partial F-test compares the two models: one with all predictors (model 1) and the other without the city dummies (model 2). The null hypothesis (H0) for the partial F-test states that excluding the city dummies does not significantly reduce the SSE. The alternative hypothesis (Ha) is that excluding the city dummies does significantly reduce the SSE.
 
+from the output:
+The F-statistic: 1.7179
+The P-value: 0.1689
+
+Since the P-value(0.1689) is greater than the chosen significance level(alpha =0.05), you do not have enough evidence to reject the null hypothesis.Therefore, based on the partial F-test, including the city dummies does not significantly reduce the SSE in a statistically significant way.
+
+In conclusion, the analysis suggests that excluding the city dummy variables (WinterSprings, WinterPark, and Oviedo) from the model does not lead to a significant decrease in the model's predictive power, as measured by the SSE.
 
 
