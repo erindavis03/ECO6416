@@ -96,7 +96,15 @@ summary(model)
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
 
 ```{r q4}
-#
+# Implement data transformations or other changes as needed
+# For example, you might apply log transformations to the dependent or independent variables.
+
+# Run a new regression
+new_model <- lm(log(Charges) ~ Age + log(BMI) + Female + log(Children + 1) + Smoker + WinterSprings + WinterPark + Oviedo, data = remaining_data)
+
+# Compare fit measures and coefficients with the previous model
+summary(new_model)
+
 ```
 
 ## Question 5
@@ -104,7 +112,41 @@ Implement the solutions from question 3, such as data transformation, along with
 Use the 30 withheld observations and calculate the performance measures for your best two models. Which is the better model? (remember that "better" depends on whether your outlook is short or long run)
 
 ```{r q5}
-#
+# Assuming your_data is your complete dataset
+set.seed(123)  # For reproducibility
+
+# Randomly select 30 observations to be withheld
+withheld_indices <- sample(1:nrow(insurance), 30)
+
+# Create a dataset with the withheld observations
+withheld_data <- insurance[withheld_indices, ]
+
+# The remaining data for training would be
+training_data <- insurance[-withheld_indices, ]
+
+# Assuming 'model' and 'new_model' are your regression models
+
+# Predictions using the first model
+predictions_model <- predict(model, newdata = withheld_data)
+
+# Predictions using the second model
+predictions_new_model <- predict(new_model, newdata = withheld_data)
+
+# Calculate performance metrics for the first model
+mse_model <- mean((predictions_model - withheld_data$Charges)^2)
+rmse_model <- sqrt(mse_model)
+r_squared_model <- 1 - (sum((withheld_data$Charges - predictions_model)^2) / sum((withheld_data$Charges - mean(withheld_data$Charges))^2))
+
+# Repeat for the second model
+mse_new_model <- mean((predictions_new_model - withheld_data$Charges)^2)
+rmse_new_model <- sqrt(mse_new_model)
+r_squared_new_model <- 1 - (sum((withheld_data$Charges - predictions_new_model)^2) / sum((withheld_data$Charges - mean(withheld_data$Charges))^2))
+
+# Print or store the results
+cat("Model 1 - MSE:", mse_model, "RMSE:", rmse_model, "R-squared:", r_squared_model, "\n")
+cat("Model 2 - MSE:", mse_new_model, "RMSE:", rmse_new_model, "R-squared:", r_squared_new_model, "\n")
+
+
 ```
 
 
@@ -113,7 +155,26 @@ Use the 30 withheld observations and calculate the performance measures for your
 Provide interpretations of the coefficients, do the signs make sense? Perform marginal change analysis (thing 2) on the independent variables.
 
 ```{r}
-#
+# Assuming 'new_model' is the model you want to interpret
+
+# Print the coefficients
+coefficients <- coef(new_model)
+print(coefficients)
+
+# Interpretation of the coefficients
+cat("Interpretation of Coefficients:\n")
+cat("Intercept (Intercept):", coefficients[1], "\n")
+cat("Age (Age):", coefficients[2], " - This represents the change in Charges for a one-unit change in Age.\n")
+cat("BMI (log(BMI)):", coefficients[3], " - This represents the change in Charges for a one-unit change in log(BMI).\n")
+cat("Female (Female):", coefficients[4], " - This represents the change in Charges for females compared to males (assuming binary gender).\n")
+cat("Children (log(Children + 1)):", coefficients[5], " - This represents the change in Charges for a one-unit change in log(Children + 1).\n")
+cat("Smoker (Smoker):", coefficients[6], " - This represents the change in Charges for smokers compared to non-smokers.\n")
+cat("City (City2, City3, ...):", coefficients[7:length(coefficients)], " - Interpretation depends on the specific city dummy variables.\n")
+
+# Perform marginal change analysis for a specific variable (e.g., Age)
+marginal_change_age <- coefficients[2] * mean(remaining_data$Age)  # Replace 'mean(remaining_data$Age)' with your desired value
+cat("\nMarginal Change in Charges for a one-unit change in Age:", marginal_change_age, "\n")
+
 ```
 
 ## Question 7
@@ -130,14 +191,117 @@ An eager insurance representative comes back with five potential clients. Using 
 
 
 ```{r}
-#
+# Creating the potential_clients data frame
+potential_clients <- data.frame(
+  Customer = c(1, 2, 3, 4, 5),
+  Age = c(60, 40, 25, 33, 45),
+  BMI = c(22, 30, 25, 35, 27),
+  Female = c(1, 0, 0, 1, 1),
+  Children = c(0, 1, 0, 2, 3),
+  Smoker = c(0, 0, 1, 0, 0),
+  Oviedo = c(1, 0, 0, 0, 1),  # Replace with the correct dummy variables for each city
+  Sanford = c(0, 1, 0, 0, 0),  # Replace with the correct dummy variables for each city
+  WinterPark = c(0, 0, 1, 0, 0),  # Replace with the correct dummy variables for each city
+  WinterSprings = c(0, 0, 0, 1, 0)  # Replace with the correct dummy variables for each city
+)
+
+# Display the potential_clients data frame
+print(potential_clients)
+
+
+# Assuming 'new_model' is the model you want to use
+# Assuming 'potential_clients' is a data frame with information about the five potential clients
+
+# Predictions for the potential clients with prediction intervals
+predictions <- predict(new_model, newdata = potential_clients, interval = "prediction")
+
+# Combine the original data and predictions
+result <- cbind(potential_clients, predictions)
+print(result)
+
+
 ```
 
 ## Question 8
 
 The owner notices that some of the predictions are wider than others, explain why.
+```{r q8}
+# Assuming the 'better_model' is the model you want to analyze
+residuals <- residuals(new_model)
+
+# Plot residuals
+plot(residuals)
+
+
+```
+The owner notices that some predictions are wider than others, the likely reason is varying prediction intervals. Prediction intervals widen when there is higher uncertainty associated with predictions. This can be influenced by factors like variability in the data or outliers.
+
+Here's an explanation:
+
+Wider Prediction Intervals: Predictions for some observations may have wider intervals when the model has higher uncertainty about the true value of the response variable.
+
+Reasons for Wider Intervals:
+
+Higher Variability in Data: If the data for certain observations are more variable, the model is less certain about the predictions.
+
+Outliers: Outliers in the data can increase uncertainty, leading to wider intervals.
+
+Non-linearity or Heteroscedasticity: If the relationship between predictors and response is non-linear or if the variability changes across the range of predictors, prediction intervals can be wider.
+
 
 ## Question 9 
 
 Are there any prediction problems that occur with the five potential clients? If so, explain.
+```{r q9}
+# Assuming 'new_model' is the model you want to use
+# Assuming 'potential_clients' is a data frame with information about the five potential clients
 
+# Predictions for the potential clients with residuals
+predictions <- predict(new_model, newdata = potential_clients, interval = "prediction")
+
+# Extract residuals
+residuals <- residuals(new_model, newdata = potential_clients)
+
+# Combine the original data, predictions, and residuals
+result <- cbind(potential_clients, predictions, residuals)
+print(result)
+
+
+
+```
+The two regression models used are:
+
+Model 1 (log-transformed Charges):
+
+Model 1 MSE: 36481726
+Model 1 RMSE: 6040.01
+Model 1 R-squared: 0.7922652
+Model 2 (original Charges):
+
+Model 2 MSE: 416183189
+Model 2 RMSE: 20400.57
+Model 2 R-squared: -1.369837
+Now, let's discuss potential prediction problems for the five potential clients:
+
+Model Choice:
+
+Model 1 (log-transformed Charges) seems to perform better, as it has a lower RMSE and a positive R-squared value, indicating a better fit.
+Model 2, with a negative R-squared, suggests a poor fit and might not be suitable for predictions.
+Prediction Interval Width:
+
+Wider prediction intervals in Model 2 (original Charges) might be problematic for precise predictions.
+Model 1 provides narrower intervals, indicating less uncertainty in predictions.
+Outliers:
+
+Both models have residuals, but Model 2 (original Charges) has a higher residual standard error, suggesting potential outliers affecting predictions.
+Model Interpretability:
+
+Model 1 coefficients are log-transformed, making them more interpretable in terms of percentage change.
+Model 2 coefficients are in the original scale, which might be less interpretable.
+R-squared:
+
+Model 1 has a positive R-squared, suggesting it explains a reasonable proportion of the variance in the data.
+Model 2 has a negative R-squared, indicating poor explanatory power.
+
+Conclusion:
+Considering the performance metrics and interpretability, Model 1 is preferred for predictions among the two models. However, it's crucial to note that prediction intervals are inherent in regression models, and predictions should be used cautiously, especially if the models are not perfect fits.
