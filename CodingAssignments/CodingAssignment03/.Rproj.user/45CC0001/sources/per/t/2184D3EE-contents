@@ -1,6 +1,6 @@
 ---
 title: "Coding Assignment 3"
-author: "Group 3"
+author: "Team N"
 date: "Due: 2023-12-09 23:59"
 output: 
   pdf_document:
@@ -28,14 +28,7 @@ Answer the following questions using complete sentences and attach all output, p
 
 
 ```{r dataset, include=TRUE}
-# # Install and load the readxl package
-install.packages("readxl")
-library(readxl)
-
-# Read the data from an Excel file
-insurance <- read.csv("../Data/Insurance_Data_Group3.csv")
-
-
+# Bring in the dataset here.
 ```
 
 
@@ -45,22 +38,7 @@ insurance <- read.csv("../Data/Insurance_Data_Group3.csv")
 Randomly select 30 observations from the sample and exclude from all modeling (i.e. n=47). Provide the summary statistics (min, max, std, mean, median) of the quantitative variables for the 70 observations.
 
 ```{r q1}
-## Read the data from the CSV file
-insurance <- read.csv("../Data/Insurance_Data_Group3.csv")
-
-# Set seed for reproducibility
-set.seed(123)
-
-# Randomly select 30 observations to exclude
-excluded_indices <- sample(1:nrow(insurance), 30)
-
-# Select the remaining 70 observations
-remaining_data <- insurance[-excluded_indices, ]
-
-# Summary statistics
-summary_stats <- summary(remaining_data[, c("Charges", "Age", "BMI")])
-print(summary_stats)
-
+#
 ```
 
 
@@ -69,27 +47,14 @@ print(summary_stats)
 Provide the correlation between all quantitative variables
 
 ```{r}
-## Correlation matrix
-correlation_matrix <- cor(remaining_data[, c("Charges", "Age", "BMI")])
-print(correlation_matrix)
-
+#
 ```
 
 
 ## Question 3
 
 Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
-```{r q3}
-# Assuming 'Cities' is represented by dummy variables (e.g., City1, City2, ...)
 
-# Run the regression excluding one city as the reference category
-model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo, data = insurance)
-
-# Replace "..." with the rest of the dummy variables
-
-# Check the summary of the model
-summary(model)
-```
 
 ## Question 4
 
