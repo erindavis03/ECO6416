@@ -91,19 +91,7 @@ model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + W
 summary(model)
 ```
 
-Now, let's evaluate the model:
 
-Linearity: The linearity assumption is not explicitly assessed in the provided information. However, if this assumption is violated, it can be addressed by transforming variables or using polynomial terms.
-
-Independence of Errors: The information provided does not explicitly check for autocorrelation. You may want to examine residual plots or use statistical tests for autocorrelation.
-
-Homoscedasticity: The residual standard error is reported as 5230, but the assessment of homoscedasticity is not explicitly mentioned. A plot of residuals against fitted values can help diagnose this assumption.
-
-Normality of Errors: The normality of errors is not explicitly tested. You can assess this assumption through normal probability plots or formal statistical tests if sample size allows.
-
-No Perfect Multicollinearity: The correlation matrix for variables is provided, and it seems there is no perfect multicollinearity. However, if correlations are extremely high, it may be necessary to address multicollinearity.
-
-In summary, it's recommended to perform diagnostic checks to assess the assumptions of linearity, independence of errors, homoscedasticity, and normality of errors. If violations are detected, appropriate remedies can be applied, such as transformations, model adjustments, or considering different modeling techniques.
 
 Gauss-Markov Assumptions:
 Linearity: The model assumes a linear relationship between the predictors and the log of Charges. Check residual plots for linearity.
@@ -225,7 +213,17 @@ cat("Model 2 - MSE:", mse_new_model, "RMSE:", rmse_new_model, "R-squared:", r_sq
 
 
 ```
+MSE and RMSE:
 
+Model 1 has significantly lower MSE and RMSE, indicating better predictive performance.
+R-squared:
+
+Model 1 has a positive R-squared, indicating it explains a substantial portion of the variance in the dependent variable.
+Model 2 has a negative R-squared, suggesting that it performs poorly compared to a model predicting the mean.
+Conclusion:
+
+Better Model: Model 1
+Reasoning: Model 1 outperforms Model 2 in terms of prediction accuracy (lower MSE and RMSE) and has a meaningful and positive R-squared.
 
 ## Question 6
 
